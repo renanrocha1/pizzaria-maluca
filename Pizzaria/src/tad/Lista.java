@@ -88,11 +88,15 @@ public class Lista {
 	}
 
 	public void removeNaPos(int pos) {
-		ElLista temp;
-		movePos(pos);
-		temp = atual.proximo;
-		movePos(pos - 1);
-		atual.proximo = temp;
+		if(pos==1)
+			removePrimeiro();
+		else{
+			ElLista temp;
+			movePos(pos);
+			temp = atual.proximo;
+			movePos(pos - 1);
+			atual.proximo = temp;
+		}
 	}
 
 	public ElLista buscaElmt(String in) {
@@ -111,5 +115,15 @@ public class Lista {
 		return atual;
 
 	}
-
+	
+	
+	public static void main(String[] args) {
+		Lista l = new Lista();
+		l.insereUltimo("Sorte\nSeus amigos compraram ingredientes demais\nPegue 1 ingrediente de um jogador");
+		l.insereUltimo("Sorte\nSeu tempero está perfeito\nGanhe 1 ingrediente");
+		l.insereUltimo("Sorte\nSua massa está no ponto certo\nGanhe 1 ingrediente");
+		l.insereUltimo("Sorte\nFaltou a luz na cozinha\nPerca 1 ingrediente");
+		l.removeNaPos(1);
+		System.out.println(l.comprimento());
+	}
 }
