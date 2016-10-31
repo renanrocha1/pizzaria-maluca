@@ -8,14 +8,14 @@ public class Pilha {
 		return this.topo == null;
 	}
 	
-	public void empilhar(String v){
-		ElPilha novo = new ElPilha(v);
+	public void empilhar(String v, byte n){
+		ElPilha novo = new ElPilha(v, n);
 		novo.proximo = this.topo;
 		this.topo = novo;
 	}
 	
-	public String desempilhar(){
-		String r = this.topo.valor;
+	public ElPilha desempilhar(){
+		ElPilha r = this.topo;
 		this.topo = topo.proximo;
 		return r;
 	}

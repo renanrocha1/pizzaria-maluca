@@ -116,14 +116,34 @@ public class Lista {
 
 	}
 	
+	public void inserePrimeiro(String s, byte n) {
+		ElLista novo = new ElLista(s, n);
+		if (vazio()) {
+			primeiro = novo;
+			ultimo = novo;
+			atual = novo;
+		} else {
+			novo.proximo = primeiro;
+			primeiro = novo;
+		}
+	}
+
+	public void insereUltimo(String s, byte n) {
+		ElLista novo = new ElLista(s, n);
+		if (vazio()) {
+			primeiro = novo;
+			ultimo = novo;
+			atual = novo;
+		} else {
+			ultimo.proximo = novo;
+			ultimo = novo;
+		}
+	}
 	
-	public static void main(String[] args) {
-		Lista l = new Lista();
-		l.insereUltimo("Sorte\nSeus amigos compraram ingredientes demais\nPegue 1 ingrediente de um jogador");
-		l.insereUltimo("Sorte\nSeu tempero está perfeito\nGanhe 1 ingrediente");
-		l.insereUltimo("Sorte\nSua massa está no ponto certo\nGanhe 1 ingrediente");
-		l.insereUltimo("Sorte\nFaltou a luz na cozinha\nPerca 1 ingrediente");
-		l.removeNaPos(1);
-		System.out.println(l.comprimento());
+	public void insereNaPos(String s,byte n, int pos) {
+		ElLista novo = new ElLista(s, n);
+		movePos(pos);
+		novo.proximo = atual.proximo;
+		atual.proximo = novo;
 	}
 }

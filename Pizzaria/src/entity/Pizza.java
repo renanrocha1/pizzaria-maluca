@@ -6,8 +6,7 @@ public class Pizza {
 
 	
 	private String sabor;
-	public Lista listaIng=new Lista();
-	public Lista listaConf=new Lista();
+	public Lista listaIng = new Lista();
 
 	public Pizza(char s) {
 		if (s == 'c') {
@@ -32,18 +31,13 @@ public class Pizza {
 		this.listaIng.insereUltimo(i3);
 		this.listaIng.insereUltimo(i4);
 		this.listaIng.insereUltimo(i5);
-		this.listaConf.inserePrimeiro("f");
-		this.listaConf.insereUltimo("f");
-		this.listaConf.insereUltimo("f");
-		this.listaConf.insereUltimo("f");
-		this.listaConf.insereUltimo("f");
 	}
 
 	public String mostraPizza() {
 		String s = getSabor()+"\n";
 
 		for (int i = 1; i <= 5; i++) {
-			s += listaIng.retornaNaPos(i).ingrdiente + " - " + listaConf.retornaNaPos(i).ingrdiente + "\n";
+			s += listaIng.retornaNaPos(i).ingrdiente + " - " + (listaIng.retornaNaPos(i).controle==0?"f":"v") + "\n";
 		}
 
 		return s;
