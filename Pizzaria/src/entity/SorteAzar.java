@@ -48,9 +48,9 @@ public class SorteAzar {
 		l.removeNaPos(pos);
 	}
 	
-	public void efeitos(byte op, Pizza piz){
+	public void efeitos(Pizza piz){
 		ElPilha ep = p.desempilhar();
-		op = ep.controle;
+		int op = ep.controle;
 		switch(op){
 			case 1:
 				
