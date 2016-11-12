@@ -7,6 +7,8 @@ public class Pizza {
 	
 	private String sabor;
 	public Lista listaIng = new Lista();
+	
+	public Pizza(){}
 
 	public Pizza(char s) {
 		if (s == 'c') {

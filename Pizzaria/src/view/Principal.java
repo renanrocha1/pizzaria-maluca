@@ -11,11 +11,12 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import entity.Pizza;
+import tad.Lista2;
 import util.Msg;
 
 public class Principal extends Shell {
 	private Label label;
-
+	protected Lista2 l2 = new Lista2();
 	/**
 	 * Launch the application.
 	 * 
@@ -50,7 +51,7 @@ public class Principal extends Shell {
 		btnCalabresa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('c');
+				Pizza p = l2.buscaElmt("Calabresa").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -62,7 +63,7 @@ public class Principal extends Shell {
 		btnPortuguesa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('p');
+				Pizza p = l2.buscaElmt("Portuguesa").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -74,7 +75,7 @@ public class Principal extends Shell {
 		btnMarguerita.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('m');
+				Pizza p = l2.buscaElmt("Marguerita").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -86,7 +87,7 @@ public class Principal extends Shell {
 		btnVegetariana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('v');
+				Pizza p = l2.buscaElmt("Vegetariana").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -98,7 +99,7 @@ public class Principal extends Shell {
 		btnRomana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('r');
+				Pizza p = l2.buscaElmt("Romana").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -110,7 +111,7 @@ public class Principal extends Shell {
 		btnToscana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('t');
+				Pizza p = l2.buscaElmt("Toscana").p;
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -131,6 +132,13 @@ public class Principal extends Shell {
 		mntmarquivo.setMenu(menu_1);
 
 		MenuItem mntmNovoJogo = new MenuItem(menu_1, SWT.NONE);
+		mntmNovoJogo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NovoJogo ng = new NovoJogo(getShell(), getStyle());
+				l2 = ng.open();
+			}
+		});
 		mntmNovoJogo.setText("&Novo Jogo");
 
 		MenuItem mntminstrues = new MenuItem(menu_1, SWT.NONE);
