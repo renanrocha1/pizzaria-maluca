@@ -124,11 +124,11 @@ public class PercaIng extends Composite {
 		button_2.setText(p.listaIng.retornaNaPos(3).ingrdiente);
 		button_3.setText(p.listaIng.retornaNaPos(4).ingrdiente);
 		button_4.setText(p.listaIng.retornaNaPos(5).ingrdiente);
-		if(p.listaIng.retornaNaPos(1).controle==1){button.setEnabled(false);}
-		if(p.listaIng.retornaNaPos(2).controle==1){button_1.setEnabled(false);}
-		if(p.listaIng.retornaNaPos(3).controle==1){button_2.setEnabled(false);}
-		if(p.listaIng.retornaNaPos(4).controle==1){button_3.setEnabled(false);}
-		if(p.listaIng.retornaNaPos(5).controle==1){button_4.setEnabled(false);}
+		if(p.listaIng.retornaNaPos(1).controle==0){button.setEnabled(false);}
+		if(p.listaIng.retornaNaPos(2).controle==0){button_1.setEnabled(false);}
+		if(p.listaIng.retornaNaPos(3).controle==0){button_2.setEnabled(false);}
+		if(p.listaIng.retornaNaPos(4).controle==0){button_3.setEnabled(false);}
+		if(p.listaIng.retornaNaPos(5).controle==0){button_4.setEnabled(false);}
 	}
 	
 	public static void getNum(int n){

@@ -3,7 +3,7 @@ package entity;
 import tad.ListaCirc;
 
 public class Tabuleiro {
-	ListaCirc l;
+	ListaCirc l = new ListaCirc();
 	SorteAzar sa = new SorteAzar();
 	
 	public Tabuleiro() {
@@ -15,7 +15,7 @@ public class Tabuleiro {
 		l.insereUltimo("Sorte ou Azar");
 		l.insereUltimo("Ervilha");
 		l.insereUltimo("Queijo");
-		l.insereUltimo("");
+		//l.insereUltimo("");
 		l.insereUltimo("Presunto");
 		l.insereUltimo("Sorte ou Azar");
 		l.insereUltimo("Calabresa");
@@ -25,7 +25,7 @@ public class Tabuleiro {
 		l.insereUltimo("Sorte ou Azar");
 		l.insereUltimo("Brócolis");
 		l.insereUltimo("Sorte ou Azar");
-		l.insereUltimo("");
+		//l.insereUltimo("");
 		l.insereUltimo("Milho");
 		l.insereUltimo("Tomate");
 		l.insereUltimo("Presunto");
@@ -47,8 +47,10 @@ public class Tabuleiro {
 		
 	}
 	
-	public void jogada(Pizza piz){
+	public void jogada(Pizza piz, int pos){
+		l.movePos(pos);
 		String casa = l.atual().ingrediente;
+		System.out.println(casa);
 		if(casa.equals("Perde Tudo")){
 			for(int i=1;i<=5;i++){
 				piz.listaIng.retornaNaPos(i).controle = 0;

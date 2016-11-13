@@ -116,6 +116,18 @@ public class Lista {
 
 	}
 	
+	public int buscaElemento(String v) {
+			int cont = 0;
+			atual = primeiro;
+			while(atual != null && atual.ingrdiente != v) {
+				atual = atual.proximo;
+				cont ++;
+			}
+			if (atual != null)
+				return cont;
+			return -1;
+		}
+	
 	public void inserePrimeiro(String s, byte n) {
 		ElLista novo = new ElLista(s, n);
 		if (vazio()) {

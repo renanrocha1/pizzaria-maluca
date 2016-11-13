@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Random;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,6 +13,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import entity.Pizza;
+import entity.Tabuleiro;
 import tad.Lista2;
 import util.Msg;
 import org.eclipse.swt.custom.CTabFolder;
@@ -19,10 +22,11 @@ import org.eclipse.swt.widgets.Composite;
 
 public class Principal extends Shell {
 	private Label label;
-	protected Lista2 l2 = new Lista2();
+	public static Lista2 l2 = new Lista2();
 	private static CTabFolder tabFolder;
 	private static CTabItem tabItem;
-	private int pos = 1;
+	private int pos = 1, jogador;
+	public Tabuleiro t = new Tabuleiro();
 	/**
 	 * Launch the application.
 	 * 
@@ -57,7 +61,7 @@ public class Principal extends Shell {
 		btnCalabresa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Calabresa").p;
+				Pizza p = l2.buscaElmt("Calabresa");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -69,7 +73,7 @@ public class Principal extends Shell {
 		btnPortuguesa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Portuguesa").p;
+				Pizza p = l2.buscaElmt("Portuguesa");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -81,7 +85,7 @@ public class Principal extends Shell {
 		btnMarguerita.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Marguerita").p;
+				Pizza p = l2.buscaElmt("Marguerita");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -93,7 +97,7 @@ public class Principal extends Shell {
 		btnVegetariana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Vegetariana").p;
+				Pizza p = l2.buscaElmt("Vegetariana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -105,7 +109,7 @@ public class Principal extends Shell {
 		btnRomana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Romana").p;
+				Pizza p = l2.buscaElmt("Romana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -117,7 +121,7 @@ public class Principal extends Shell {
 		btnToscana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = l2.buscaElmt("Toscana").p;
+				Pizza p = l2.buscaElmt("Toscana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -179,6 +183,26 @@ public class Principal extends Shell {
 		tabFolder.setBounds(0, 134, 572, 287);
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
+		Button btnJogarDado = new Button(this, SWT.NONE);
+		btnJogarDado.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Random r = new Random();
+				pos+= r.nextInt(6)+1;
+				l2.movePos(jogador);
+				t.jogada(l2.atual.p, pos);
+				System.out.println(l2.comprimento());
+				if(jogador<l2.comprimento())
+					jogador++;
+				else
+					jogador = 1;
+				
+				System.out.println(jogador);
+			}
+		});
+		btnJogarDado.setBounds(10, 10, 75, 25);
+		btnJogarDado.setText("Jogar dado");
+		jogador = 1;
 		
 		createContents();
 	}
@@ -222,6 +246,20 @@ public class Principal extends Shell {
 			tabItem.setShowClose(true);
 			tabItem.setText("Perdeu ingrs");
 			Composite composite = new PercaIng(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	public static void openComposite3(){
+		tabItem = jaAberto("Pegou ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Pegou ingrs");
+			Composite composite = new PegueIngs(tabFolder, SWT.NONE);
 			tabItem.setControl(composite);
 			tabFolder.setSelection(tabItem);
 		}else{

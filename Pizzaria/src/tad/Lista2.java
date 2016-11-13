@@ -102,7 +102,7 @@ public class Lista2 {
 		}
 	}
 
-	public ElLista2 buscaElmt(String in) {
+	public Pizza buscaElmt(String in) {
 		atual = primeiro;
 		boolean retornou = false;
 		while (retornou == false && atual != null) {
@@ -113,9 +113,11 @@ public class Lista2 {
 			}
 		}
 		if (atual == null) {
+			System.out.println(atual.p);
 			return null;
 		}
-		return atual;
+		System.out.println(atual.p);
+		return atual.p;
 
 	}
 }

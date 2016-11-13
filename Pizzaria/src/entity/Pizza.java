@@ -13,17 +13,17 @@ public class Pizza {
 
 	public Pizza(char s) {
 		if (s == 'c') {
-			defineSabor("Calabresa", "Calabresa", "Brocolis", "Azeitona", "Ovo", "Ervilha");
+			defineSabor("Calabresa", "Calabresa", "Brócolis", "Azeitona", "Ovo", "Ervilha");
 		} else if (s == 'p') {
 			defineSabor("Portuguesa", "Presunto", "Queijo", "Milho", "Ovo", "Azeitona");
 		} else if (s == 't') {
 			defineSabor("Toscana", "Tomate", "Azeitona", "Calabresa", "Presunto", "Cebola");
 		} else if (s == 'm') {
-			defineSabor("Marguerita", "Calabresa", "Milho", "Tomate", "Brocolis", "Queijo");
+			defineSabor("Marguerita", "Calabresa", "Milho", "Tomate", "Brócolis", "Queijo");
 		} else if (s == 'r') {
 			defineSabor("Romana", "Queijo", "Cebola", "Milho", "Presunto", "Ervilha");
 		} else if (s == 'v') {
-			defineSabor("Vegetariana", "Brocolis", "Tomate", "Ervilha", "Ovo", "Cebola");
+			defineSabor("Vegetariana", "Brócolis", "Tomate", "Ervilha", "Ovo", "Cebola");
 		}
 	}
 

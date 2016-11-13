@@ -7,6 +7,7 @@ import tad.ElPilha;
 import tad.Lista;
 import tad.Pilha;
 import view.GanheIng;
+import view.PegueIngs;
 import view.PercaIng;
 import view.Principal;
 
@@ -47,7 +48,6 @@ public class SorteAzar {
 	public static void reembaralha(){
 		Random r = new Random();
 		int pos = r.nextInt(l.comprimento())+1;
-		System.out.println(pos+ " "+ l.comprimento());
 		p.empilhar(l.retornaNaPos(pos).ingrdiente, l.retornaNaPos(pos).controle);
 		l.removeNaPos(pos);
 	}
@@ -74,10 +74,12 @@ public class SorteAzar {
 				Principal.openComposite2();
 				break;
 			case 5:
-				
+				PegueIngs.getNum(1);
+				Principal.openComposite3();
 				break;
 			case 6:
-				
+				PegueIngs.getNum(2);
+				Principal.openComposite3();
 				break;
 			case 7:
 				for(int i = 1;i<=5;i++){
