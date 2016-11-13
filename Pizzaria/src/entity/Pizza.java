@@ -1,6 +1,7 @@
 package entity;
 
 import tad.Lista;
+import tad.Lista2;
 
 public class Pizza {
 
@@ -51,6 +52,21 @@ public class Pizza {
 
 	public void setSabor(String sabor) {
 		this.sabor = sabor;
+	}
+	
+	public String confereVencedor(Lista2 l2){
+		int size = l2.comprimento();
+		for(int i=1;i<=size;i++){
+			l2.movePos(i);
+			int j=1;
+			while(l2.atual.p.listaIng.retornaNaPos(j).controle!=1 && j<6){
+				j++;
+			}
+			if (j>=5){
+				return "Jogador da pizza "+l2.atual.p.getSabor()+" venceu";
+			}
+		}
+		return "";
 	}
 
 }

@@ -6,11 +6,15 @@ import java.util.Random;
 import tad.ElPilha;
 import tad.Lista;
 import tad.Pilha;
+import view.GanheIng;
+import view.PercaIng;
+import view.Principal;
 
 public class SorteAzar {
 	
 	static Pilha p = new Pilha();
 	static Lista l = new Lista();
+	public static Pizza piz;
 	
 	public SorteAzar() {
 		l.insereUltimo("Sorte\nSeus amigos compraram ingredientes demais\nPegue 1 ingrediente de um jogador",(byte)5);
@@ -49,20 +53,25 @@ public class SorteAzar {
 	}
 	
 	public void efeitos(Pizza piz){
+		this.piz = piz;
 		ElPilha ep = p.desempilhar();
 		int op = ep.controle;
 		switch(op){
 			case 1:
-				
+				GanheIng.getNum(1);
+				Principal.openComposite1();
 				break;
 			case 2:
-				
+				GanheIng.getNum(2);
+				Principal.openComposite1();
 				break;
 			case 3:
-				
+				PercaIng.getNum(1);
+				Principal.openComposite2();
 				break;
 			case 4:
-				
+				PercaIng.getNum(2);
+				Principal.openComposite2();
 				break;
 			case 5:
 				

@@ -13,10 +13,16 @@ import org.eclipse.swt.widgets.Shell;
 import entity.Pizza;
 import tad.Lista2;
 import util.Msg;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.widgets.Composite;
 
 public class Principal extends Shell {
 	private Label label;
 	protected Lista2 l2 = new Lista2();
+	private static CTabFolder tabFolder;
+	private static CTabItem tabItem;
+	private int pos = 1;
 	/**
 	 * Launch the application.
 	 * 
@@ -120,7 +126,7 @@ public class Principal extends Shell {
 		btnToscana.setText("Toscana");
 
 		label = new Label(this, SWT.NONE);
-		label.setBounds(10, 144, 552, 287);
+		label.setBounds(171, 0, 374, 130);
 
 		Menu menu = new Menu(this, SWT.BAR);
 		setMenuBar(menu);
@@ -168,6 +174,12 @@ public class Principal extends Shell {
 
 		MenuItem mntmajuda_1 = new MenuItem(menu_2, SWT.NONE);
 		mntmajuda_1.setText("&Ajuda");
+		
+		tabFolder = new CTabFolder(this, SWT.BORDER);
+		tabFolder.setBounds(0, 134, 572, 287);
+		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		
+		
 		createContents();
 	}
 
@@ -183,5 +195,45 @@ public class Principal extends Shell {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	public static void openComposite1(){
+		tabItem = jaAberto("Ganhou ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Ganhou ingrs");
+			Composite composite = new GanheIng(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	public static void closeComposite(){
+		tabItem.dispose();
+	}
+	
+	public static void openComposite2(){
+		tabItem = jaAberto("Perdeu ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Perdeu ingrs");
+			Composite composite = new PercaIng(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	private static CTabItem jaAberto(String nome){
+		for (CTabItem item : tabFolder.getItems()) {
+			if(item.getText().equals(nome))
+				return item;
+		}
+		return null;
 	}
 }
