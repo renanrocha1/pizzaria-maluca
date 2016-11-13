@@ -221,7 +221,6 @@ public class NovoJogo extends Dialog {
 			public void modifyText(ModifyEvent arg0) {
 				if (combo.getSelectionIndex()>=0){	
 					jogadores = Integer.parseInt(combo.getText());
-					System.out.println(jogadores);
 					lblTexto.setText("Jogador 1, selecione sua pizza");
 				}
 			}

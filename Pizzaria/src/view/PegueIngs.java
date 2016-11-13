@@ -17,7 +17,7 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class PegueIngs extends Composite {
 	private static int ings = 1;
-	public Pizza myp, piz2;
+	public Pizza myp = SorteAzar.piz, piz2;
 	private Combo combo;
 	private Button button;
 	private Button button_1;
@@ -39,10 +39,12 @@ public class PegueIngs extends Composite {
 		combo = new Combo(this, SWT.NONE);
 		combo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
-				getIngs(Principal.l2);
+				limpaCombo(Principal.l2);
+				if(combo.getSelectionIndex()>=0)
+					getIngs(Principal.l2);
 			}
 		});
-		combo.setItems(new String[] {"Calabresa", "Portuguesa", "Toscana", "Marguerita", "Romana", "Vegetariana"});
+		combo.setItems(new String[] {});
 		combo.setBounds(74, 47, 286, 23);
 		combo.setText("Selecione de qual pizza voce quer os ingredientes");
 		
@@ -116,8 +118,7 @@ public class PegueIngs extends Composite {
 		button_4.setText("...");
 		button_4.setBounds(207, 121, 75, 25);
 		
-		myp = SorteAzar.piz;
-		combo.remove(myp.getSabor());
+		//combo.remove(myp.getSabor());
 	}
 
 	@Override
@@ -126,13 +127,29 @@ public class PegueIngs extends Composite {
 	}
 	
 	public void getIngs(Lista2 l){
-		System.out.println(l.buscaElmt(combo.getText()));
 		piz2 = l.buscaElmt(combo.getText());
 		button.setText(piz2.listaIng.retornaNaPos(1).ingrdiente);
+		if(piz2.listaIng.retornaNaPos(1).controle==0 || myp.listaIng.buscaElemento(button.getText())<0)
+			button.setEnabled(false);
 		button_1.setText(piz2.listaIng.retornaNaPos(2).ingrdiente);
+		if(piz2.listaIng.retornaNaPos(2).controle==0 || myp.listaIng.buscaElemento(button_1.getText())<0)
+			button_1.setEnabled(false);
 		button_2.setText(piz2.listaIng.retornaNaPos(3).ingrdiente);
+		if(piz2.listaIng.retornaNaPos(3).controle==0 || myp.listaIng.buscaElemento(button_2.getText())<0)
+			button_2.setEnabled(false);
 		button_3.setText(piz2.listaIng.retornaNaPos(4).ingrdiente);
+		if(piz2.listaIng.retornaNaPos(4).controle==0 || myp.listaIng.buscaElemento(button_3.getText())<0)
+			button_3.setEnabled(false);
 		button_4.setText(piz2.listaIng.retornaNaPos(5).ingrdiente);
+		if(piz2.listaIng.retornaNaPos(5).controle==0 || myp.listaIng.buscaElemento(button_4.getText())<0)
+			button_4.setEnabled(false);
+	}
+	
+	public void limpaCombo(Lista2 l){
+		for(int i=1;i<=l.comprimento();i++){
+			combo.add(l.retornaNaPos(i).p.getSabor());
+		}
+		combo.remove(myp.getSabor());
 	}
 	
 	public static void getNum(int n){

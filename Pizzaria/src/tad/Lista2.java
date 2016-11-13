@@ -113,10 +113,8 @@ public class Lista2 {
 			}
 		}
 		if (atual == null) {
-			System.out.println(atual.p);
 			return null;
 		}
-		System.out.println(atual.p);
 		return atual.p;
 
 	}

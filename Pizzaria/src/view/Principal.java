@@ -19,6 +19,7 @@ import util.Msg;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class Principal extends Shell {
 	private Label label;
@@ -27,6 +28,7 @@ public class Principal extends Shell {
 	private static CTabItem tabItem;
 	private int pos = 1, jogador;
 	public Tabuleiro t = new Tabuleiro();
+	private Label label_1;
 	/**
 	 * Launch the application.
 	 * 
@@ -130,7 +132,7 @@ public class Principal extends Shell {
 		btnToscana.setText("Toscana");
 
 		label = new Label(this, SWT.NONE);
-		label.setBounds(171, 0, 374, 130);
+		label.setBounds(171, 0, 114, 130);
 
 		Menu menu = new Menu(this, SWT.BAR);
 		setMenuBar(menu);
@@ -190,18 +192,21 @@ public class Principal extends Shell {
 				Random r = new Random();
 				pos+= r.nextInt(6)+1;
 				l2.movePos(jogador);
-				t.jogada(l2.atual.p, pos);
-				System.out.println(l2.comprimento());
+				label_1.setText("Jogador "+jogador+" ("+l2.atual.p.getSabor()+") parou em "+t.jogada(l2.atual.p, pos));
 				if(jogador<l2.comprimento())
 					jogador++;
 				else
 					jogador = 1;
-				
-				System.out.println(jogador);
 			}
 		});
 		btnJogarDado.setBounds(10, 10, 75, 25);
 		btnJogarDado.setText("Jogar dado");
+		
+		label_1 = new Label(this, SWT.NONE);
+		label_1.setAlignment(SWT.CENTER);
+		label_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
+		label_1.setBounds(307, 0, 255, 130);
+		label_1.setText("...");
 		jogador = 1;
 		
 		createContents();

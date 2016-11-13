@@ -47,10 +47,9 @@ public class Tabuleiro {
 		
 	}
 	
-	public void jogada(Pizza piz, int pos){
+	public String jogada(Pizza piz, int pos){
 		l.movePos(pos);
 		String casa = l.atual().ingrediente;
-		System.out.println(casa);
 		if(casa.equals("Perde Tudo")){
 			for(int i=1;i<=5;i++){
 				piz.listaIng.retornaNaPos(i).controle = 0;
@@ -65,5 +64,6 @@ public class Tabuleiro {
 				}
 			}
 		}
+		return casa;
 	}
 }

@@ -55,6 +55,7 @@ public class SorteAzar {
 	public void efeitos(Pizza piz){
 		this.piz = piz;
 		ElPilha ep = p.desempilhar();
+		l.insereUltimo(ep.valor, ep.controle);
 		int op = ep.controle;
 		switch(op){
 			case 1:
@@ -87,5 +88,7 @@ public class SorteAzar {
 				}
 				break;
 		}
+		if(p.vazio())
+			reembaralha();
 	}
 }
