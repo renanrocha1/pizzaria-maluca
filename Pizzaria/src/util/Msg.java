@@ -7,12 +7,11 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Msg {
 	
+	public static final String AVISO="AVISO", PERGUNTA="PERGUNTA", ERRO="ERRO",INFORMACAO="INFORMACAO", SIMNAO="SIMNAO", SIMNAOCANCELA="SIMNAOCANCELA";
 	
 	public static int mensagem(String titulo, String texto, String conf, Shell shell){
 		
 		MessageBox m;
-		
-		conf = conf.toUpperCase();
 		
 		switch (conf) {
 		case "AVISO":

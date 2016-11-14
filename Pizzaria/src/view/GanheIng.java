@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Label;
 
 import entity.Pizza;
 import entity.SorteAzar;
+import entity.Tabuleiro;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -43,7 +44,7 @@ public class GanheIng extends Composite {
 					Principal.closeComposite();
 			}
 		});
-		btn1.setBounds(53, 74, 75, 25);
+		btn1.setBounds(54, 95, 75, 25);
 		btn1.setText("...");
 		
 		btn2 = new Button(this, SWT.NONE);
@@ -58,7 +59,7 @@ public class GanheIng extends Composite {
 			}
 		});
 		btn2.setText("...");
-		btn2.setBounds(134, 74, 75, 25);
+		btn2.setBounds(135, 95, 75, 25);
 		
 		btn3 = new Button(this, SWT.NONE);
 		btn3.addSelectionListener(new SelectionAdapter() {
@@ -72,7 +73,7 @@ public class GanheIng extends Composite {
 			}
 		});
 		btn3.setText("...");
-		btn3.setBounds(215, 74, 75, 25);
+		btn3.setBounds(216, 95, 75, 25);
 		
 		btn4 = new Button(this, SWT.NONE);
 		btn4.addSelectionListener(new SelectionAdapter() {
@@ -86,7 +87,7 @@ public class GanheIng extends Composite {
 			}
 		});
 		btn4.setText("...");
-		btn4.setBounds(296, 74, 75, 25);
+		btn4.setBounds(297, 95, 75, 25);
 		
 		btn5 = new Button(this, SWT.NONE);
 		btn5.addSelectionListener(new SelectionAdapter() {
@@ -100,10 +101,10 @@ public class GanheIng extends Composite {
 			}
 		});
 		btn5.setText("...");
-		btn5.setBounds(176, 105, 75, 25);
+		btn5.setBounds(177, 126, 75, 25);
 		
 		lblPizza = new Label(this, SWT.NONE);
-		lblPizza.setBounds(40, 41, 88, 15);
+		lblPizza.setBounds(40, 41, 350, 35);
 		lblPizza.setText("...");
 		getPizza(SorteAzar.piz);
 
@@ -116,7 +117,7 @@ public class GanheIng extends Composite {
 	
 	private void getPizza(Pizza p){
 		piz = p;
-		lblPizza.setText(p.getSabor());
+		lblPizza.setText(p.getSabor()+". "+Tabuleiro.setSA());
 		btn1.setText(p.listaIng.retornaNaPos(1).ingrdiente);
 		btn2.setText(p.listaIng.retornaNaPos(2).ingrdiente);
 		btn3.setText(p.listaIng.retornaNaPos(3).ingrdiente);

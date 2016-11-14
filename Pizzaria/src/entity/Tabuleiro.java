@@ -5,6 +5,7 @@ import tad.ListaCirc;
 public class Tabuleiro {
 	ListaCirc l = new ListaCirc();
 	SorteAzar sa = new SorteAzar();
+	public static String ret;
 	
 	public Tabuleiro() {
 		l = new ListaCirc();
@@ -43,8 +44,6 @@ public class Tabuleiro {
 		l.insereUltimo("Calabresa");
 		l.insereUltimo("Sorte ou Azar");
 		l.insereUltimo("Cebola");
-		
-		
 	}
 	
 	public String jogada(Pizza piz, int pos){
@@ -65,5 +64,13 @@ public class Tabuleiro {
 			}
 		}
 		return casa;
+	}
+	
+	public static void getSA(String r){
+		ret = r;
+	}
+	
+	public static String setSA(){
+		return ret;
 	}
 }
