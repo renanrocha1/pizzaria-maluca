@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Random;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,11 +13,22 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import entity.Pizza;
+import entity.Tabuleiro;
+import tad.Lista2;
 import util.Msg;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class Principal extends Shell {
 	private Label label;
-
+	public static Lista2 l2 = new Lista2();
+	private static CTabFolder tabFolder;
+	private static CTabItem tabItem;
+	private int pos = 1, jogador;
+	public Tabuleiro t = new Tabuleiro();
+	private Label label_1;
 	/**
 	 * Launch the application.
 	 * 
@@ -50,7 +63,7 @@ public class Principal extends Shell {
 		btnCalabresa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('c');
+				Pizza p = l2.buscaElmt("Calabresa");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -62,7 +75,7 @@ public class Principal extends Shell {
 		btnPortuguesa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('p');
+				Pizza p = l2.buscaElmt("Portuguesa");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -74,7 +87,7 @@ public class Principal extends Shell {
 		btnMarguerita.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('m');
+				Pizza p = l2.buscaElmt("Marguerita");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -86,7 +99,7 @@ public class Principal extends Shell {
 		btnVegetariana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('v');
+				Pizza p = l2.buscaElmt("Vegetariana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -98,7 +111,7 @@ public class Principal extends Shell {
 		btnRomana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('r');
+				Pizza p = l2.buscaElmt("Romana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -110,7 +123,7 @@ public class Principal extends Shell {
 		btnToscana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Pizza p = new Pizza('t');
+				Pizza p = l2.buscaElmt("Toscana");
 				String s = p.mostraPizza();
 				label.setText(s);
 			}
@@ -119,7 +132,7 @@ public class Principal extends Shell {
 		btnToscana.setText("Toscana");
 
 		label = new Label(this, SWT.NONE);
-		label.setBounds(10, 144, 552, 287);
+		label.setBounds(171, 0, 114, 130);
 
 		Menu menu = new Menu(this, SWT.BAR);
 		setMenuBar(menu);
@@ -131,6 +144,13 @@ public class Principal extends Shell {
 		mntmarquivo.setMenu(menu_1);
 
 		MenuItem mntmNovoJogo = new MenuItem(menu_1, SWT.NONE);
+		mntmNovoJogo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NovoJogo ng = new NovoJogo(getShell(), getStyle());
+				l2 = ng.open();
+			}
+		});
 		mntmNovoJogo.setText("&Novo Jogo");
 
 		MenuItem mntminstrues = new MenuItem(menu_1, SWT.NONE);
@@ -160,6 +180,35 @@ public class Principal extends Shell {
 
 		MenuItem mntmajuda_1 = new MenuItem(menu_2, SWT.NONE);
 		mntmajuda_1.setText("&Ajuda");
+		
+		tabFolder = new CTabFolder(this, SWT.BORDER);
+		tabFolder.setBounds(0, 134, 572, 287);
+		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		
+		Button btnJogarDado = new Button(this, SWT.NONE);
+		btnJogarDado.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Random r = new Random();
+				pos+= r.nextInt(6)+1;
+				l2.movePos(jogador);
+				label_1.setText("Jogador "+jogador+" ("+l2.atual.p.getSabor()+") parou em "+t.jogada(l2.atual.p, pos));
+				if(jogador<l2.comprimento())
+					jogador++;
+				else
+					jogador = 1;
+			}
+		});
+		btnJogarDado.setBounds(10, 10, 75, 25);
+		btnJogarDado.setText("Jogar dado");
+		
+		label_1 = new Label(this, SWT.NONE);
+		label_1.setAlignment(SWT.CENTER);
+		label_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
+		label_1.setBounds(307, 0, 255, 130);
+		label_1.setText("...");
+		jogador = 1;
+		
 		createContents();
 	}
 
@@ -175,5 +224,59 @@ public class Principal extends Shell {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	public static void openComposite1(){
+		tabItem = jaAberto("Ganhou ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Ganhou ingrs");
+			Composite composite = new GanheIng(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	public static void closeComposite(){
+		tabItem.dispose();
+	}
+	
+	public static void openComposite2(){
+		tabItem = jaAberto("Perdeu ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Perdeu ingrs");
+			Composite composite = new PercaIng(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	public static void openComposite3(){
+		tabItem = jaAberto("Pegou ingrs");
+		if(tabItem==null){
+			tabItem = new CTabItem(tabFolder, SWT.NONE);
+			tabItem.setShowClose(true);
+			tabItem.setText("Pegou ingrs");
+			Composite composite = new PegueIngs(tabFolder, SWT.NONE);
+			tabItem.setControl(composite);
+			tabFolder.setSelection(tabItem);
+		}else{
+			tabFolder.setSelection(tabItem);
+		}
+	}
+	
+	private static CTabItem jaAberto(String nome){
+		for (CTabItem item : tabFolder.getItems()) {
+			if(item.getText().equals(nome))
+				return item;
+		}
+		return null;
 	}
 }

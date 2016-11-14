@@ -1,26 +1,29 @@
 package entity;
 
 import tad.Lista;
+import tad.Lista2;
 
 public class Pizza {
 
 	
 	private String sabor;
 	public Lista listaIng = new Lista();
+	
+	public Pizza(){}
 
 	public Pizza(char s) {
 		if (s == 'c') {
-			defineSabor("Calabresa", "Calabresa", "Brocolis", "Azeitona", "Ovo", "Ervilha");
+			defineSabor("Calabresa", "Calabresa", "Brócolis", "Azeitona", "Ovo", "Ervilha");
 		} else if (s == 'p') {
 			defineSabor("Portuguesa", "Presunto", "Queijo", "Milho", "Ovo", "Azeitona");
 		} else if (s == 't') {
 			defineSabor("Toscana", "Tomate", "Azeitona", "Calabresa", "Presunto", "Cebola");
 		} else if (s == 'm') {
-			defineSabor("Marguerita", "Calabresa", "Milho", "Tomate", "Brocolis", "Queijo");
+			defineSabor("Marguerita", "Calabresa", "Milho", "Tomate", "Brócolis", "Queijo");
 		} else if (s == 'r') {
 			defineSabor("Romana", "Queijo", "Cebola", "Milho", "Presunto", "Ervilha");
 		} else if (s == 'v') {
-			defineSabor("Vegetariana", "Brocolis", "Tomate", "Ervilha", "Ovo", "Cebola");
+			defineSabor("Vegetariana", "Brócolis", "Tomate", "Ervilha", "Ovo", "Cebola");
 		}
 	}
 
@@ -49,6 +52,21 @@ public class Pizza {
 
 	public void setSabor(String sabor) {
 		this.sabor = sabor;
+	}
+	
+	public String confereVencedor(Lista2 l2){
+		int size = l2.comprimento();
+		for(int i=1;i<=size;i++){
+			l2.movePos(i);
+			int j=1;
+			while(l2.atual.p.listaIng.retornaNaPos(j).controle!=1 && j<6){
+				j++;
+			}
+			if (j>=5){
+				return "Jogador da pizza "+l2.atual.p.getSabor()+" venceu";
+			}
+		}
+		return "";
 	}
 
 }

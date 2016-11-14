@@ -1,9 +1,12 @@
 package tad;
 
-public class Lista {
-	private ElLista primeiro, ultimo, atual;
+import entity.Pizza;
 
-	public Lista() {
+public class Lista2 {
+	
+	public ElLista2 primeiro, ultimo, atual;
+	
+	public Lista2() {
 		primeiro = ultimo = atual = null;
 	}
 
@@ -21,8 +24,8 @@ public class Lista {
 		return comp;
 	}
 
-	public void inserePrimeiro(String s) {
-		ElLista novo = new ElLista(s);
+	public void inserePrimeiro(Pizza p) {
+		ElLista2 novo = new ElLista2(p);
 		if (vazio()) {
 			primeiro = novo;
 			ultimo = novo;
@@ -33,8 +36,8 @@ public class Lista {
 		}
 	}
 
-	public void insereUltimo(String s) {
-		ElLista novo = new ElLista(s);
+	public void insereUltimo(Pizza p) {
+		ElLista2 novo = new ElLista2(p);
 		if (vazio()) {
 			primeiro = novo;
 			ultimo = novo;
@@ -52,24 +55,24 @@ public class Lista {
 		}
 	}
 
-	public ElLista retornaNaPos(int pos) {
+	public ElLista2 retornaNaPos(int pos) {
 		movePos(pos);
-		ElLista elemento = atual;
+		ElLista2 elemento = atual;
 		return elemento;
 	}
 
-	public void insereNaPos(String s, int pos) {
-		ElLista novo = new ElLista(s);
+	public void insereNaPos(Pizza p, int pos) {
+		ElLista2 novo = new ElLista2(p);
 		movePos(pos);
 		novo.proximo = atual.proximo;
 		atual.proximo = novo;
 	}
 
-	public ElLista primeiro() {
+	public ElLista2 primeiro() {
 		return primeiro;
 	}
 
-	public ElLista ultimo() {
+	public ElLista2 ultimo() {
 		return ultimo;
 	}
 
@@ -91,7 +94,7 @@ public class Lista {
 		if(pos==1)
 			removePrimeiro();
 		else{
-			ElLista temp;
+			ElLista2 temp;
 			movePos(pos);
 			temp = atual.proximo;
 			movePos(pos - 1);
@@ -99,11 +102,11 @@ public class Lista {
 		}
 	}
 
-	public ElLista buscaElmt(String in) {
+	public Pizza buscaElmt(String in) {
 		atual = primeiro;
 		boolean retornou = false;
 		while (retornou == false && atual != null) {
-			if (atual.ingrdiente.equals(in)) {
+			if (atual.p.getSabor().equals(in)) {
 				retornou = true;
 			} else {
 				atual = atual.proximo;
@@ -112,50 +115,9 @@ public class Lista {
 		if (atual == null) {
 			return null;
 		}
-		return atual;
+		return atual.p;
 
-	}
-	
-	public int buscaElemento(String v) {
-			int cont = 0;
-			atual = primeiro;
-			while(atual != null && atual.ingrdiente != v) {
-				atual = atual.proximo;
-				cont ++;
-			}
-			if (atual != null)
-				return cont;
-			return -1;
-		}
-	
-	public void inserePrimeiro(String s, byte n) {
-		ElLista novo = new ElLista(s, n);
-		if (vazio()) {
-			primeiro = novo;
-			ultimo = novo;
-			atual = novo;
-		} else {
-			novo.proximo = primeiro;
-			primeiro = novo;
-		}
-	}
-
-	public void insereUltimo(String s, byte n) {
-		ElLista novo = new ElLista(s, n);
-		if (vazio()) {
-			primeiro = novo;
-			ultimo = novo;
-			atual = novo;
-		} else {
-			ultimo.proximo = novo;
-			ultimo = novo;
-		}
-	}
-	
-	public void insereNaPos(String s,byte n, int pos) {
-		ElLista novo = new ElLista(s, n);
-		movePos(pos);
-		novo.proximo = atual.proximo;
-		atual.proximo = novo;
 	}
 }
+
+	
