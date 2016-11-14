@@ -95,18 +95,15 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('m'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnMarguerita.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
+					
 			}
 		});
 		
@@ -115,18 +112,15 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('v'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnVegetariana.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
+					
 			}
 		});
 		
@@ -135,18 +129,14 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('r'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnRomana.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
 			}
 		});
 		
@@ -155,18 +145,14 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('t'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnToscana.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
 			}
 		});
 		
@@ -175,18 +161,14 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('c'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnCalabresa.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
 			}
 		});
 		
@@ -195,18 +177,14 @@ public class NovoJogo extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				result.insereUltimo(new Pizza('p'));
 				if (jogadores<=1){
-					btnMarguerita.setEnabled(false);
-					btnPortuguesa.setEnabled(false);
-					btnRomana.setEnabled(false);
-					btnToscana.setEnabled(false);
-					btnVegetariana.setEnabled(false);
-					btnCalabresa.setEnabled(false);
+					shell.close();
 				}
 				else{
 					btnPortuguesa.setEnabled(false);
 					jogadores--;
 				}
-				lblTexto.setText("Jogador "+(n++)+" selecione sua pizza");
+				if(!shell.isDisposed())
+					lblTexto.setText("Jogador "+(++n)+" selecione sua pizza");
 			}
 		});
 		

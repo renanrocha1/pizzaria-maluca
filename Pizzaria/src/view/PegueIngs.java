@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Label;
 
 import entity.Pizza;
 import entity.SorteAzar;
+import entity.Tabuleiro;
 import tad.Lista2;
 
 import org.eclipse.swt.SWT;
@@ -24,6 +25,7 @@ public class PegueIngs extends Composite {
 	private Button button_2;
 	private Button button_3;
 	private Button button_4;
+	private Label lblPegueIngredientesDe;
 	/**
 	 * Create the composite.
 	 * @param parent
@@ -32,14 +34,13 @@ public class PegueIngs extends Composite {
 	public PegueIngs(Composite parent, int style) {
 		super(parent, style);
 		
-		Label lblPegueIngredientesDe = new Label(this, SWT.NONE);
-		lblPegueIngredientesDe.setBounds(10, 10, 233, 15);
-		lblPegueIngredientesDe.setText("Pegue ingrediente(s) de outro(s) jogador(es)");
+		lblPegueIngredientesDe = new Label(this, SWT.NONE);
+		lblPegueIngredientesDe.setBounds(10, 10, 390, 31);
+		lblPegueIngredientesDe.setText(myp.getSabor()+". "+Tabuleiro.setSA());
 		
 		combo = new Combo(this, SWT.NONE);
 		combo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
-				limpaCombo(Principal.l2);
 				if(combo.getSelectionIndex()>=0)
 					getIngs(Principal.l2);
 			}
@@ -118,6 +119,7 @@ public class PegueIngs extends Composite {
 		button_4.setText("...");
 		button_4.setBounds(207, 121, 75, 25);
 		
+		limpaCombo(Principal.l2);
 		//combo.remove(myp.getSabor());
 	}
 

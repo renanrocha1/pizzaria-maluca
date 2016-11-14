@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Label;
 
 import entity.Pizza;
 import entity.SorteAzar;
+import entity.Tabuleiro;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -34,7 +35,7 @@ public class PercaIng extends Composite {
 		lblPercaIngredientes.setText("Perca Ingrediente(s)");
 		
 		lblPizza = new Label(this, SWT.NONE);
-		lblPizza.setBounds(32, 40, 83, 15);
+		lblPizza.setBounds(32, 40, 394, 34);
 		lblPizza.setText("...");
 		
 		button = new Button(this, SWT.NONE);
@@ -48,7 +49,7 @@ public class PercaIng extends Composite {
 					Principal.closeComposite();
 			}
 		});
-		button.setBounds(69, 78, 75, 25);
+		button.setBounds(75, 96, 75, 25);
 		button.setText("...");
 		
 		button_1 = new Button(this, SWT.NONE);
@@ -63,7 +64,7 @@ public class PercaIng extends Composite {
 			}
 		});
 		button_1.setText("...");
-		button_1.setBounds(150, 78, 75, 25);
+		button_1.setBounds(156, 96, 75, 25);
 		
 		button_2 = new Button(this, SWT.NONE);
 		button_2.addSelectionListener(new SelectionAdapter() {
@@ -77,7 +78,7 @@ public class PercaIng extends Composite {
 			}
 		});
 		button_2.setText("...");
-		button_2.setBounds(231, 78, 75, 25);
+		button_2.setBounds(237, 96, 75, 25);
 		
 		button_3 = new Button(this, SWT.NONE);
 		button_3.addSelectionListener(new SelectionAdapter() {
@@ -91,7 +92,7 @@ public class PercaIng extends Composite {
 			}
 		});
 		button_3.setText("...");
-		button_3.setBounds(312, 78, 75, 25);
+		button_3.setBounds(318, 96, 75, 25);
 		
 		button_4 = new Button(this, SWT.NONE);
 		button_4.addSelectionListener(new SelectionAdapter() {
@@ -105,7 +106,7 @@ public class PercaIng extends Composite {
 			}
 		});
 		button_4.setText("...");
-		button_4.setBounds(189, 109, 75, 25);
+		button_4.setBounds(195, 127, 75, 25);
 		
 		getPizza(SorteAzar.piz);
 
@@ -118,7 +119,7 @@ public class PercaIng extends Composite {
 	
 	private void getPizza(Pizza piz){
 		p = piz;
-		lblPizza.setText(p.getSabor());
+		lblPizza.setText(p.getSabor()+". "+Tabuleiro.setSA());
 		button.setText(p.listaIng.retornaNaPos(1).ingrdiente);
 		button_1.setText(p.listaIng.retornaNaPos(2).ingrdiente);
 		button_2.setText(p.listaIng.retornaNaPos(3).ingrdiente);
