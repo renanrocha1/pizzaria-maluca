@@ -131,19 +131,19 @@ public class PegueIngs extends Composite {
 	public void getIngs(Lista2 l){
 		piz2 = l.buscaElmt(combo.getText());
 		button.setText(piz2.listaIng.retornaNaPos(1).ingrdiente);
-		if(piz2.listaIng.retornaNaPos(1).controle==0 || myp.listaIng.buscaElemento(button.getText())<0)
+		if(piz2.listaIng.retornaNaPos(1).controle==0 || myp.listaIng.buscaElmt(button.getText())!=null && myp.listaIng.buscaElmt(button.getText()).controle==1)
 			button.setEnabled(false);
 		button_1.setText(piz2.listaIng.retornaNaPos(2).ingrdiente);
-		if(piz2.listaIng.retornaNaPos(2).controle==0 || myp.listaIng.buscaElemento(button_1.getText())<0)
+		if(piz2.listaIng.retornaNaPos(2).controle==0 || myp.listaIng.buscaElmt(button_1.getText())!=null && myp.listaIng.buscaElmt(button_1.getText()).controle==1)
 			button_1.setEnabled(false);
 		button_2.setText(piz2.listaIng.retornaNaPos(3).ingrdiente);
-		if(piz2.listaIng.retornaNaPos(3).controle==0 || myp.listaIng.buscaElemento(button_2.getText())<0)
+		if(piz2.listaIng.retornaNaPos(3).controle==0 || myp.listaIng.buscaElmt(button_2.getText())!=null && myp.listaIng.buscaElmt(button_2.getText()).controle==1)
 			button_2.setEnabled(false);
 		button_3.setText(piz2.listaIng.retornaNaPos(4).ingrdiente);
-		if(piz2.listaIng.retornaNaPos(4).controle==0 || myp.listaIng.buscaElemento(button_3.getText())<0)
+		if(piz2.listaIng.retornaNaPos(4).controle==0 || myp.listaIng.buscaElmt(button_3.getText())!=null && myp.listaIng.buscaElmt(button_3.getText()).controle==1)
 			button_3.setEnabled(false);
 		button_4.setText(piz2.listaIng.retornaNaPos(5).ingrdiente);
-		if(piz2.listaIng.retornaNaPos(5).controle==0 || myp.listaIng.buscaElemento(button_4.getText())<0)
+		if(piz2.listaIng.retornaNaPos(5).controle==0 || myp.listaIng.buscaElmt(button_4.getText())!=null && myp.listaIng.buscaElmt(button_4.getText()).controle==1)
 			button_4.setEnabled(false);
 	}
 	

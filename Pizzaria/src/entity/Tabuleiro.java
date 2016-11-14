@@ -55,6 +55,7 @@ public class Tabuleiro {
 			}
 		}else if(casa.equals("Sorte ou Azar")){
 			sa.efeitos(piz);
+			if (sa.op7){casa = "Sorte ou Azar\nPizza queimou. Perdeu tudo";}
 		}else{
 			for(int i=1;i<=5;i++){
 				if(piz.listaIng.retornaNaPos(i).ingrdiente.equals(casa)){

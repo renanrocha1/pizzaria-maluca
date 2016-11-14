@@ -16,6 +16,7 @@ public class SorteAzar {
 	static Pilha p = new Pilha();
 	static Lista l = new Lista();
 	public static Pizza piz;
+	public boolean op7;
 	
 	public SorteAzar() {
 		l.insereUltimo("Sorte. Seus amigos compraram ingredientes demais\nPegue 1 ingrediente de um jogador",(byte)5);
@@ -53,6 +54,7 @@ public class SorteAzar {
 	}
 	
 	public void efeitos(Pizza piz){
+		op7 = false;
 		this.piz = piz;
 		ElPilha ep = p.desempilhar();
 		Tabuleiro.getSA(ep.valor);
@@ -87,6 +89,7 @@ public class SorteAzar {
 				for(int i = 1;i<=5;i++){
 					piz.listaIng.retornaNaPos(i).controle = 0;
 				}
+				op7 = true;
 				break;
 		}
 		if(p.vazio())
