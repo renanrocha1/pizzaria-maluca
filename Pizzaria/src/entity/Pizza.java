@@ -1,7 +1,6 @@
 package entity;
 
 import tad.Lista;
-import tad.Lista2;
 
 public class Pizza {
 
