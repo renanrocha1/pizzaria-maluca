@@ -60,6 +60,7 @@ public class Principal extends Shell {
 		setModified(true);
 
 		Button btnCalabresa = new Button(this, SWT.NONE);
+		btnCalabresa.setEnabled(false);
 		btnCalabresa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -72,6 +73,7 @@ public class Principal extends Shell {
 		btnCalabresa.setText("Calabresa");
 
 		Button btnPortuguesa = new Button(this, SWT.NONE);
+		btnPortuguesa.setEnabled(false);
 		btnPortuguesa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -84,6 +86,7 @@ public class Principal extends Shell {
 		btnPortuguesa.setText("Portuguesa");
 
 		Button btnMarguerita = new Button(this, SWT.NONE);
+		btnMarguerita.setEnabled(false);
 		btnMarguerita.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -96,6 +99,7 @@ public class Principal extends Shell {
 		btnMarguerita.setText("Marguerita");
 
 		Button btnVegetariana = new Button(this, SWT.NONE);
+		btnVegetariana.setEnabled(false);
 		btnVegetariana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -108,6 +112,7 @@ public class Principal extends Shell {
 		btnVegetariana.setText("Vegetariana");
 
 		Button btnRomana = new Button(this, SWT.NONE);
+		btnRomana.setEnabled(false);
 		btnRomana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -120,6 +125,7 @@ public class Principal extends Shell {
 		btnRomana.setText("Romana");
 
 		Button btnToscana = new Button(this, SWT.NONE);
+		btnToscana.setEnabled(false);
 		btnToscana.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -144,13 +150,7 @@ public class Principal extends Shell {
 		mntmarquivo.setMenu(menu_1);
 
 		MenuItem mntmNovoJogo = new MenuItem(menu_1, SWT.NONE);
-		mntmNovoJogo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				NovoJogo ng = new NovoJogo(getShell(), getStyle());
-				l2 = ng.open();
-			}
-		});
+		
 		mntmNovoJogo.setText("&Novo Jogo");
 
 		MenuItem mntminstrues = new MenuItem(menu_1, SWT.NONE);
@@ -192,6 +192,7 @@ public class Principal extends Shell {
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
 		Button btnJogarDado = new Button(this, SWT.NONE);
+		btnJogarDado.setEnabled(false);
 		btnJogarDado.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -212,6 +213,23 @@ public class Principal extends Shell {
 		});
 		btnJogarDado.setBounds(10, 10, 75, 25);
 		btnJogarDado.setText("Jogar dado");
+		
+		mntmNovoJogo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				NovoJogo ng = new NovoJogo(getShell(), getStyle());
+				l2 = ng.open();
+				if(ng.shell.isDisposed()){
+					btnJogarDado.setEnabled(true);
+					if (l2.buscaElmt(btnCalabresa.getText())!=null){btnCalabresa.setEnabled(true);}
+					if (l2.buscaElmt(btnMarguerita.getText())!=null)btnMarguerita.setEnabled(true);
+					if (l2.buscaElmt(btnPortuguesa.getText())!=null)btnPortuguesa.setEnabled(true);
+					if (l2.buscaElmt(btnRomana.getText())!=null)btnRomana.setEnabled(true);
+					if (l2.buscaElmt(btnToscana.getText())!=null)btnToscana.setEnabled(true);
+					if (l2.buscaElmt(btnVegetariana.getText())!=null)btnVegetariana.setEnabled(true);
+				}
+			}
+		});
 		
 		label_1 = new Label(this, SWT.NONE);
 		label_1.setAlignment(SWT.CENTER);
@@ -292,7 +310,7 @@ public class Principal extends Shell {
 			while(j<6 && l2.atual.p.listaIng.retornaNaPos(j).controle==1){
 				j++;
 			}
-			if (j>=5){
+			if (j>5){
 				return "Jogador da pizza "+l2.atual.p.getSabor()+" venceu";
 			}
 		}
