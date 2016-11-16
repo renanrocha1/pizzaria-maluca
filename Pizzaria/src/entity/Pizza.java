@@ -39,7 +39,7 @@ public class Pizza {
 		String s = getSabor()+"\n";
 
 		for (int i = 1; i <= 5; i++) {
-			s += listaIng.retornaNaPos(i).ingrdiente + " - " + (listaIng.retornaNaPos(i).controle==0?"f":"v") + "\n";
+			s += listaIng.retornaNaPos(i).ingrdiente + " - " + (listaIng.retornaNaPos(i).controle==0?"Faltando!":"Já tem!") + "\n";
 		}
 
 		return s;
