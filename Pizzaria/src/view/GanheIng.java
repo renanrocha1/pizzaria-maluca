@@ -104,7 +104,7 @@ public class GanheIng extends Composite {
 		btn5.setBounds(177, 126, 75, 25);
 		
 		lblPizza = new Label(this, SWT.NONE);
-		lblPizza.setBounds(40, 41, 350, 35);
+		lblPizza.setBounds(30, 30, 396, 66);
 		lblPizza.setText("...");
 		getPizza(SorteAzar.piz);
 
@@ -117,7 +117,7 @@ public class GanheIng extends Composite {
 	
 	private void getPizza(Pizza p){
 		piz = p;
-		lblPizza.setText(p.getSabor()+". "+Tabuleiro.setSA());
+		lblPizza.setText(p.getSabor()+".\n"+Tabuleiro.setSA());
 		btn1.setText(p.listaIng.retornaNaPos(1).ingrdiente);
 		btn2.setText(p.listaIng.retornaNaPos(2).ingrdiente);
 		btn3.setText(p.listaIng.retornaNaPos(3).ingrdiente);

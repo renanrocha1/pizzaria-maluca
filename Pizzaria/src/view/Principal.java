@@ -29,6 +29,8 @@ public class Principal extends Shell {
 	private int pos = 1, jogador;
 	public Tabuleiro t = new Tabuleiro();
 	private Label label_1;
+	private String log = "SEQUÊNCIA DE JOGADAS\n";
+	
 	/**
 	 * Launch the application.
 	 * 
@@ -144,17 +146,23 @@ public class Principal extends Shell {
 		setMenuBar(menu);
 
 		MenuItem mntmarquivo = new MenuItem(menu, SWT.CASCADE);
-		mntmarquivo.setText("&Arquivo");
+		mntmarquivo.setText("&O Jogo");
 
 		Menu menu_1 = new Menu(mntmarquivo);
 		mntmarquivo.setMenu(menu_1);
 
 		MenuItem mntmNovoJogo = new MenuItem(menu_1, SWT.NONE);
+		mntmNovoJogo.setText("&Nova Pizzaria");
 		
-		mntmNovoJogo.setText("&Novo Jogo");
-
-		MenuItem mntminstrues = new MenuItem(menu_1, SWT.NONE);
-		mntminstrues.setText("&Instru\u00E7\u00F5es");
+		MenuItem mntmRegistro = new MenuItem(menu_1, SWT.NONE);
+		mntmRegistro.setText("&Histórico da Partida");
+		mntmRegistro.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) 
+			{
+				Msg.mensagem("Histórico da Partida", log, "INFORMACAO", getShell());
+				
+			}
+		});
 
 		new MenuItem(menu_1, SWT.SEPARATOR);
 
@@ -162,7 +170,7 @@ public class Principal extends Shell {
 		mntmsair.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (Msg.mensagem("Sair", "Deseja sair do jogo?", "SimNao", getShell()) == SWT.YES) {
+				if (Msg.mensagem("Sair", "Deseja sair do jogo?", "SIMNAO", getShell()) == SWT.YES) {
 					System.exit(0);
 				}
 			}
@@ -179,13 +187,25 @@ public class Principal extends Shell {
 		mntmsobre.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Msg.mensagem("Sobre", "Pizzaria Maluca\nDesenvolvido por Huellinton Mota, Renan Rocha e Vinicius Albini", Msg.INFORMACAO, getShell());
+				Msg.mensagem("Sobre", "Pizzaria Maluca\nDesenvolvido por Huellinton Mota, Renan Rocha e Vinicius Albini\nCurso de Ciência da Computação - UNISUL\n2016/02", Msg.INFORMACAO, getShell());
 			}
 		});
 		mntmsobre.setText("&Sobre");
 
 		MenuItem mntmajuda_1 = new MenuItem(menu_2, SWT.NONE);
-		mntmajuda_1.setText("&Ajuda");
+		mntmajuda_1.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent e)
+			{
+				Msg.mensagem("Como Jogar", "1. Clique na opção \"O Jogo\"\n"+
+											"2. Clique em \"Nova Pizzaria\"\n"+
+											"3. Selecione a quantidade de participantes e depois suas respectivas pizzas para jogar\n"+
+											"4. Para iniciar a partida, clique em \"Rolar dado\", dando início as ações que serão indicadas na tela\n"+
+											"5. Para ver o andamento da pizza, clique no botão referente a ela e veja seus ingredientes.\n", 
+											Msg.INFORMACAO, getShell());
+			}
+		});
+		mntmajuda_1.setText("&Instruções");
 		
 		tabFolder = new CTabFolder(this, SWT.BORDER);
 		tabFolder.setBounds(0, 134, 572, 287);
@@ -207,7 +227,11 @@ public class Principal extends Shell {
 					jogador = 1;
 				winner = confereVencedor(l2);
 				if (!winner.equals("")){
+					log += "\n"+label_1.getText()+ " e "+winner;
 					Msg.mensagem("Winner, Winner, chicken dinner!", winner, Msg.AVISO, getShell());
+				}
+				else {
+					log += "\n"+label_1.getText();
 				}
 			}
 		});
