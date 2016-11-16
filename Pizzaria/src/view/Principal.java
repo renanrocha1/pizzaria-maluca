@@ -30,7 +30,7 @@ public class Principal extends Shell {
 	public Tabuleiro t = new Tabuleiro();
 	private Label label_1;
 	private String log = "SEQUÊNCIA DE JOGADAS\n";
-	
+
 	/**
 	 * Launch the application.
 	 * 
@@ -59,6 +59,7 @@ public class Principal extends Shell {
 	 */
 	public Principal(Display display) {
 		super(display, SWT.SHELL_TRIM);
+		setImage(SWTResourceManager.getImage(Principal.class, "/img/PizzaEdited.png"));
 		setModified(true);
 
 		Button btnCalabresa = new Button(this, SWT.NONE);
@@ -153,14 +154,13 @@ public class Principal extends Shell {
 
 		MenuItem mntmNovoJogo = new MenuItem(menu_1, SWT.NONE);
 		mntmNovoJogo.setText("&Nova Pizzaria");
-		
+
 		MenuItem mntmRegistro = new MenuItem(menu_1, SWT.NONE);
 		mntmRegistro.setText("&Histórico da Partida");
 		mntmRegistro.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) 
-			{
+			public void widgetSelected(SelectionEvent e) {
 				Msg.mensagem("Histórico da Partida", log, "INFORMACAO", getShell());
-				
+
 			}
 		});
 
@@ -170,9 +170,7 @@ public class Principal extends Shell {
 		mntmsair.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (Msg.mensagem("Sair", "Deseja sair do jogo?", "SIMNAO", getShell()) == SWT.YES) {
-					System.exit(0);
-				}
+				sair();
 			}
 		});
 		mntmsair.setText("&Sair");
@@ -187,81 +185,91 @@ public class Principal extends Shell {
 		mntmsobre.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Msg.mensagem("Sobre", "Pizzaria Maluca\nDesenvolvido por Huellinton Mota, Renan Rocha e Vinicius Albini\nCurso de Ciência da Computação - UNISUL\n2016/02", Msg.INFORMACAO, getShell());
+				Msg.mensagem("Sobre",
+						"Desenvolvido por:\n\nHuellinton Mota\nRenan Rocha\nVinicius Albini\n\nCurso de Ciência da Computação - UNISUL\n2016/02",
+						Msg.INFORMACAO, getShell());
 			}
 		});
 		mntmsobre.setText("&Sobre");
 
 		MenuItem mntmajuda_1 = new MenuItem(menu_2, SWT.NONE);
-		mntmajuda_1.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				Msg.mensagem("Como Jogar", "1. Clique na opção \"O Jogo\"\n"+
-											"2. Clique em \"Nova Pizzaria\"\n"+
-											"3. Selecione a quantidade de participantes e depois suas respectivas pizzas para jogar\n"+
-											"4. Para iniciar a partida, clique em \"Rolar dado\", dando início as ações que serão indicadas na tela\n"+
-											"5. Para ver o andamento da pizza, clique no botão referente a ela e veja seus ingredientes.\n", 
-											Msg.INFORMACAO, getShell());
+		mntmajuda_1.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				Msg.mensagem("Como Jogar",
+						"1. Clique na opção \"O Jogo\"\n" + "2. Clique em \"Nova Pizzaria\"\n"
+								+ "3. Selecione a quantidade de participantes e depois suas respectivas pizzas para jogar\n"
+								+ "4. Para iniciar a partida, clique em \"Rolar dado\", dando início as ações que serão indicadas na tela\n"
+								+ "5. Para ver o andamento da pizza, clique no botão referente a ela e veja seus ingredientes.\n",
+						Msg.INFORMACAO, getShell());
 			}
 		});
 		mntmajuda_1.setText("&Instruções");
-		
+
 		tabFolder = new CTabFolder(this, SWT.BORDER);
 		tabFolder.setBounds(0, 134, 572, 287);
-		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-		
+		tabFolder.setSelectionBackground(
+				Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+
 		Button btnJogarDado = new Button(this, SWT.NONE);
+		btnJogarDado.setToolTipText("");
+		btnJogarDado.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		btnJogarDado.setEnabled(false);
 		btnJogarDado.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				String winner;
 				Random r = new Random();
-				pos+= r.nextInt(6)+1;
+				pos += r.nextInt(6) + 1;
 				l2.movePos(jogador);
-				label_1.setText("Jogador "+jogador+" ("+l2.atual.p.getSabor()+") parou em "+t.jogada(l2.atual.p, pos));
-				if(jogador<l2.comprimento())
+				label_1.setText("Jogador " + jogador + " (" + l2.atual.p.getSabor() + ") parou em "
+						+ t.jogada(l2.atual.p, pos));
+				if (jogador < l2.comprimento())
 					jogador++;
 				else
 					jogador = 1;
 				winner = confereVencedor(l2);
-				if (!winner.equals("")){
-					log += "\n"+label_1.getText()+ " e "+winner;
+				if (!winner.equals("")) {
+					log += "\n" + label_1.getText() + " e " + winner;
 					Msg.mensagem("Winner, Winner, chicken dinner!", winner, Msg.AVISO, getShell());
-				}
-				else {
-					log += "\n"+label_1.getText();
+				} else {
+					log += "\n" + label_1.getText();
 				}
 			}
 		});
 		btnJogarDado.setBounds(10, 10, 75, 25);
 		btnJogarDado.setText("Jogar dado");
-		
+
 		mntmNovoJogo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				NovoJogo ng = new NovoJogo(getShell(), getStyle());
 				l2 = ng.open();
-				if(ng.shell.isDisposed()){
+				if (ng.shell.isDisposed()) {
 					btnJogarDado.setEnabled(true);
-					if (l2.buscaElmt(btnCalabresa.getText())!=null){btnCalabresa.setEnabled(true);}
-					if (l2.buscaElmt(btnMarguerita.getText())!=null)btnMarguerita.setEnabled(true);
-					if (l2.buscaElmt(btnPortuguesa.getText())!=null)btnPortuguesa.setEnabled(true);
-					if (l2.buscaElmt(btnRomana.getText())!=null)btnRomana.setEnabled(true);
-					if (l2.buscaElmt(btnToscana.getText())!=null)btnToscana.setEnabled(true);
-					if (l2.buscaElmt(btnVegetariana.getText())!=null)btnVegetariana.setEnabled(true);
+					if (l2.buscaElmt(btnCalabresa.getText()) != null) {
+						btnCalabresa.setEnabled(true);
+					}
+					if (l2.buscaElmt(btnMarguerita.getText()) != null)
+						btnMarguerita.setEnabled(true);
+					if (l2.buscaElmt(btnPortuguesa.getText()) != null)
+						btnPortuguesa.setEnabled(true);
+					if (l2.buscaElmt(btnRomana.getText()) != null)
+						btnRomana.setEnabled(true);
+					if (l2.buscaElmt(btnToscana.getText()) != null)
+						btnToscana.setEnabled(true);
+					if (l2.buscaElmt(btnVegetariana.getText()) != null)
+						btnVegetariana.setEnabled(true);
 				}
 			}
 		});
-		
+
 		label_1 = new Label(this, SWT.NONE);
 		label_1.setAlignment(SWT.CENTER);
 		label_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.BOLD));
 		label_1.setBounds(307, 0, 255, 130);
 		label_1.setText("...");
 		jogador = 1;
-		
+
 		createContents();
 	}
 
@@ -278,74 +286,81 @@ public class Principal extends Shell {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-	
-	public static void openComposite1(){
+
+	public static void openComposite1() {
 		tabItem = jaAberto("Ganhou ingrs");
-		if(tabItem==null){
+		if (tabItem == null) {
 			tabItem = new CTabItem(tabFolder, SWT.NONE);
 			tabItem.setShowClose(true);
 			tabItem.setText("Ganhou ingrs");
 			Composite composite = new GanheIng(tabFolder, SWT.NONE);
 			tabItem.setControl(composite);
 			tabFolder.setSelection(tabItem);
-		}else{
+		} else {
 			tabFolder.setSelection(tabItem);
 		}
 	}
-	
-	public static void closeComposite(){
+
+	public static void closeComposite() {
 		tabItem.dispose();
 	}
-	
-	public static void openComposite2(){
+
+	public static void openComposite2() {
 		tabItem = jaAberto("Perdeu ingrs");
-		if(tabItem==null){
+		if (tabItem == null) {
 			tabItem = new CTabItem(tabFolder, SWT.NONE);
 			tabItem.setShowClose(true);
 			tabItem.setText("Perdeu ingrs");
 			Composite composite = new PercaIng(tabFolder, SWT.NONE);
 			tabItem.setControl(composite);
 			tabFolder.setSelection(tabItem);
-		}else{
+		} else {
 			tabFolder.setSelection(tabItem);
 		}
 	}
-	
-	public static void openComposite3(){
+
+	public static void openComposite3() {
 		tabItem = jaAberto("Pegou ingrs");
-		if(tabItem==null){
+		if (tabItem == null) {
 			tabItem = new CTabItem(tabFolder, SWT.NONE);
 			tabItem.setShowClose(true);
 			tabItem.setText("Pegou ingrs");
 			Composite composite = new PegueIngs(tabFolder, SWT.NONE);
 			tabItem.setControl(composite);
 			tabFolder.setSelection(tabItem);
-		}else{
+		} else {
 			tabFolder.setSelection(tabItem);
 		}
 	}
-	
-	private String confereVencedor(Lista2 l2){
+
+	private String confereVencedor(Lista2 l2) {
 		int size = l2.comprimento();
-		for(int i=1;i<=size;i++){
+		for (int i = 1; i <= size; i++) {
 			l2.movePos(i);
-			int j=1;
-			//System.out.println(l2.atual.p.listaIng.retornaNaPos(6).controle);
-			while(j<6 && l2.atual.p.listaIng.retornaNaPos(j).controle==1){
+			int j = 1;
+			// System.out.println(l2.atual.p.listaIng.retornaNaPos(6).controle);
+			while (j < 6 && l2.atual.p.listaIng.retornaNaPos(j).controle == 1) {
 				j++;
 			}
-			if (j>5){
-				return "Jogador da pizza "+l2.atual.p.getSabor()+" venceu";
+			if (j > 5) {
+				return "Jogador da pizza " + l2.atual.p.getSabor() + " venceu";
 			}
 		}
 		return "";
 	}
-	
-	private static CTabItem jaAberto(String nome){
+
+	private static CTabItem jaAberto(String nome) {
 		for (CTabItem item : tabFolder.getItems()) {
-			if(item.getText().equals(nome))
+			if (item.getText().equals(nome))
 				return item;
 		}
 		return null;
+	}
+
+	private void sair() {
+		if (Msg.mensagem("Sair", "Deseja sair do jogo?", "SIMNAO", getShell()) == SWT.YES) {
+			System.exit(0);
+		}
+
 	}
 }
